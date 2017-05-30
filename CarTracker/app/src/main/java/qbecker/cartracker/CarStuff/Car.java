@@ -1,18 +1,21 @@
 package qbecker.cartracker.CarStuff;
 
+import org.json.JSONObject;
+
+import java.io.Serializable;
+
 /**
  * Created by qbecker on 5/27/17.
  */
 
-public class Car {
+public class Car implements Serializable {
     String name;
     String make;
     String model;
+    String description;
     Double mpg;
     Double totalMiles;
     Double totalCost;
-    Trip[] totalTrips;
-    Repair[] totalRepairs;
     int id;
 
     public int getId() {
@@ -23,25 +26,43 @@ public class Car {
         this.id = id;
     }
 
+
+    public Car(String jsonString){
+        try{
+            JSONObject json = new JSONObject(jsonString);
+            name = json.getString("name");
+            description = json.getString("description");
+            make = json.getString("make");
+            model = json.getString("model");
+            mpg = json.getDouble("mpg");
+            totalMiles = json.getDouble("totalMiles");
+            totalCost = json.getDouble("totalCost");
+            id = json.getInt("id");
+
+        }catch(Exception e){
+            android.util.Log.w(this.getClass().getSimpleName(), "Error reading from JSON");
+        }
+    }
+
     public Car(){
         name = "New Car";
         make = "Unknown Make";
-        model  = "Uknown Model";
+        model  = "Unknown Model";
+        description = "No description";
         mpg = 0.0;
         totalMiles = 0.0;
     }
 
     public Car(String name, String make, String model,
                Double mpg, Double totalMiles, Double totalCost,
-               Trip[] totalTrips, Repair[] totalRepairs){
+               String description){
         this.name = name;
         this.model = model;
         this.make = make;
         this.mpg = mpg;
         this.totalMiles = totalMiles;
-        this.totalTrips = totalTrips;
-        this.totalRepairs = totalRepairs;
         this.totalCost = totalCost;
+        this.description = description;
     }
 
     public String getName() {
@@ -91,22 +112,4 @@ public class Car {
     public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
     }
-
-    public Trip[] getTotalTrips() {
-        return totalTrips;
-    }
-
-    public void setTotalTrips(Trip[] totalTrips) {
-        this.totalTrips = totalTrips;
-    }
-
-    public Repair[] getTotalRepairs() {
-        return totalRepairs;
-    }
-
-    public void setTotalRepairs(Repair[] totalRepairs) {
-        this.totalRepairs = totalRepairs;
-    }
-
-
 }
