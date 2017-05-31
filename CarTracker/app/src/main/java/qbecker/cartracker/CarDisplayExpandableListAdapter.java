@@ -3,13 +3,15 @@ package qbecker.cartracker;
 import android.content.Context;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +20,9 @@ import java.util.List;
  * Created by qbecker on 5/30/17.
  */
 
-public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter{
+public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter implements View.OnTouchListener,
+        ExpandableListView.OnGroupExpandListener,
+        ExpandableListView.OnGroupCollapseListener{
 
     public Context context;
     public List<String> expandableListTitle;
@@ -33,9 +37,9 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter{
         List<String> trips = new ArrayList<String>();
         trips.add("None Yet");
 
+        String blue = "Blue Honda";
 
-        List<String> repairs = new ArrayList<String>();
-        repairs.add("None Yet");
+        List<String> repairs = databaseDAO.GetAllRepairsForCar(blue, this.context);
 
 
         List<String> info = new ArrayList<String>();
@@ -122,5 +126,20 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter{
     @Override
     public boolean isChildSelectable(int listPosition, int expandedListPosition) {
         return true;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
+    }
+
+    @Override
+    public void onGroupCollapse(int groupPosition) {
+
+    }
+
+    @Override
+    public void onGroupExpand(int groupPosition) {
+
     }
 }

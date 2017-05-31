@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements ListView.OnItemClickListener{
-    SQLiteDatabase crsDB;
+
     private String[] names;
     public ArrayAdapter adapter;
     private  ListView carList;
@@ -44,32 +44,11 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
         this.startActivityForResult(displayCar,1);
     }
 
-    public ArrayList<String> getAllPlaces(){
 
-        CarDB db = new CarDB((Context)this);
-        try {
-            crsDB = db.openDB();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        Cursor cur = crsDB.rawQuery("select name from cars;", new String[]{});
-        ArrayList<String> al = new ArrayList<String>();
-        while(cur.moveToNext()){
-            try{
-                al.add(cur.getString(0));
-            }catch(Exception ex){
-                android.util.Log.w(this.getClass().getSimpleName(),"exception stepping thru cursor"+ex.getMessage());
-            }
-        }
-        crsDB.close();
-        db.close();
-        return al;
-
-    }
 
     private void prepareAdapter(){
 
-        ArrayList<String> al = getAllPlaces();
+        ArrayList<String> al = databaseDAO.getAllCars(this);
         names =  al.toArray(new String[al.size()]);
     }
 }
