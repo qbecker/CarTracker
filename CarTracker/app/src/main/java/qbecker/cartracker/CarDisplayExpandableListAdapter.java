@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,30 +30,20 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter{
 
         this.expandableListDetail = new HashMap<String, List<String>>();
         this.expandableListTitle = expandableListTitle;
-        List<String> cricket = new ArrayList<String>();
-        cricket.add("India");
-        cricket.add("Pakistan");
-        cricket.add("Australia");
-        cricket.add("England");
-        cricket.add("South Africa");
+        List<String> trips = new ArrayList<String>();
+        trips.add("None Yet");
 
-        List<String> football = new ArrayList<String>();
-        football.add("Brazil");
-        football.add("Spain");
-        football.add("Germany");
-        football.add("Netherlands");
-        football.add("Italy");
 
-        List<String> basketball = new ArrayList<String>();
-        basketball.add("United States");
-        basketball.add("Spain");
-        basketball.add("Argentina");
-        basketball.add("France");
-        basketball.add("Russia");
+        List<String> repairs = new ArrayList<String>();
+        repairs.add("None Yet");
 
-        this.expandableListDetail.put("CRICKET TEAMS", cricket);
-        this.expandableListDetail.put("FOOTBALL TEAMS", football);
-        this.expandableListDetail.put("BASKETBALL TEAMS", basketball);
+
+        List<String> info = new ArrayList<String>();
+        info.add("None Yet");
+        this.expandableListDetail.put("Trips", trips);
+        this.expandableListDetail.put("Info", info);
+        this.expandableListDetail.put("Repairs", repairs);
+
         this.expandableListTitle = new ArrayList<String>(this.expandableListDetail.keySet());
 
     }
@@ -77,6 +68,10 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter{
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item, null);
         }
+        TextView expandedListItems = (TextView) convertView
+                .findViewById(R.id.lblListItem);
+
+        expandedListItems.setText(expandedListText);
 
         return convertView;
     }
@@ -106,11 +101,16 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter{
     public View getGroupView(int listPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
         String listTitle = (String) getGroup(listPosition);
+        android.util.Log.w(this.getClass().getSimpleName(), listTitle);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_group, null);
         }
+        TextView listHeaderText = (TextView) convertView
+                .findViewById(R.id.lblListHeader);
+
+        listHeaderText.setText(listTitle);
         return convertView;
     }
 

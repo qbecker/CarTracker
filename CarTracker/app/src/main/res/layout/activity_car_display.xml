@@ -1,31 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="qbecker.cartracker.CarDisplayActivity">
+    tools:context="qbecker.cartracker.CarDisplayActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <Button
         android:id="@+id/addTripButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Trip"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="368dp" />
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="404dp"
+        android:layout_alignBaseline="@+id/addRepairButton"
+        android:layout_alignBottom="@+id/addRepairButton"
+        android:layout_alignRight="@+id/individualCarListView"
+        android:layout_alignEnd="@+id/individualCarListView"
+        android:layout_marginRight="25dp"
+        android:layout_marginEnd="25dp" />
 
     <Button
         android:id="@+id/addRepairButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Repair"
-        tools:layout_editor_absoluteX="239dp"
-        tools:layout_editor_absoluteY="368dp" />
+        tools:layout_editor_absoluteX="236dp"
+        tools:layout_editor_absoluteY="404dp"
+        android:layout_marginBottom="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/individualCarListView"
+        android:layout_alignStart="@+id/individualCarListView"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp" />
 
     <ExpandableListView
         android:id="@+id/individualCarListView"
         android:layout_width="349dp"
         android:layout_height="313dp"
         tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="16dp" />
-</android.support.constraint.ConstraintLayout>
+        tools:layout_editor_absoluteY="33dp"
+        android:layout_marginTop="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
