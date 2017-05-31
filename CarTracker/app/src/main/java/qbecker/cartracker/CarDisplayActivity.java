@@ -1,5 +1,6 @@
 package qbecker.cartracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,7 +16,7 @@ public class CarDisplayActivity extends AppCompatActivity {
     private Button addTripButton;
     public ExpandableListView carListView;
     public CarDisplayExpandableListAdapter carExpandListViewAdapter;
-
+    private String selectedCar;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
 
@@ -26,7 +27,10 @@ public class CarDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_display);
 
-        carExpandListViewAdapter = new CarDisplayExpandableListAdapter(this, expandableListTitle, expandableListDetail);
+        Intent intent = getIntent();
+        selectedCar = intent.getStringExtra("Selected Car");
+
+        carExpandListViewAdapter = new CarDisplayExpandableListAdapter(this, expandableListTitle, expandableListDetail, selectedCar);
 
         addRepairButton = (Button) findViewById(R.id.addRepairButton);
         addTripButton = (Button) findViewById(R.id.addTripButton);

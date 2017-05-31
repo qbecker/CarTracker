@@ -39,7 +39,7 @@ public class databaseDAO {
         return al;
     }
 
-    public static ArrayList<String> GetAllRepairsForCar(String name, Context parent){
+    public static ArrayList<String> GetAllRepairsNamesForCar(String name, Context parent){
         SQLiteDatabase crsDB;
         Cursor cur;
         CarDB db = new CarDB(parent);
@@ -47,13 +47,11 @@ public class databaseDAO {
         try {
 
             crsDB = db.openDB();
-            cur = crsDB.rawQuery("SELECT repairs.description, repairs.cost, repairs.date FROM repairs  JOIN cars WHERE cars.name = ? AND cars.id = repairs.id;", new String[]{name});
+            cur = crsDB.rawQuery("SELECT repairs.description FROM repairs  JOIN cars WHERE cars.name = ? AND cars.id = repairs.id;", new String[]{name});
             while(cur.moveToNext()){
                 try{
                     al.add(cur.getString(0));
-                    android.util.Log.w(parent.getClass().getSimpleName(), cur.getString(0));
                 }catch(Exception ex){
-
                     android.util.Log.w(parent.getClass().getSimpleName(),"exception stepping thru cursor"+ex.getMessage());
                 }
             }
@@ -65,15 +63,14 @@ public class databaseDAO {
         return al;
     }
 
-    public static ArrayList<String> GetAllTripsForCar(String name, Context parent){
+    public static ArrayList<String> GetAllTripNamesForCar(String name, Context parent){
         SQLiteDatabase crsDB;
         Cursor cur;
         CarDB db = new CarDB(parent);
         ArrayList<String> al = new ArrayList<String>();
         try {
             crsDB = db.openDB();
-            cur = crsDB.rawQuery("select name from cars;", new String[]{name});
-
+            cur = crsDB.rawQuery("SELECT trips.description FROM trips  JOIN cars WHERE cars.name = ? AND cars.id = trips.id", new String[]{name});
             while(cur.moveToNext()){
                 try{
                     al.add(cur.getString(0));

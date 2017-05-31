@@ -20,10 +20,12 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
     private String[] names;
     public ArrayAdapter adapter;
     private  ListView carList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         carList = (ListView) findViewById(R.id.carlistview);
         names = new String[]{"No Cars, Yet"};
         this.prepareAdapter();
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
 
         Intent displayCar = new Intent(this, CarDisplayActivity.class);
         String temp = carList.getItemAtPosition(position).toString();
-        displayCar.putExtra("selectedCar", temp);
+        displayCar.putExtra("Selected Car", temp);
         this.startActivityForResult(displayCar,1);
     }
 

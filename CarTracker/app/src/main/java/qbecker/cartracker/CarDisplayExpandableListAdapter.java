@@ -1,7 +1,6 @@
 package qbecker.cartracker;
 
 import android.content.Context;
-
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,27 +24,18 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
     public Context context;
     public List<String> expandableListTitle;
     public HashMap<String, List<String>> expandableListDetail;
+    public String selectedCar;
 
     public CarDisplayExpandableListAdapter(Context context, List<String> expandableListTitle,
-                                           HashMap<String, List<String>> expandableListDetail) {
+                                           HashMap<String, List<String>> expandableListDetail, String selectedCar) {
         this.context = context;
-
+        this.selectedCar = selectedCar;
         this.expandableListDetail = new HashMap<String, List<String>>();
         this.expandableListTitle = expandableListTitle;
-        List<String> trips = new ArrayList<String>();
-        trips.add("None Yet");
-
-        String blue = "Blue Honda";
-
-        List<String> repairs = databaseDAO.GetAllRepairsForCar(blue, this.context);
-
-
-        List<String> info = new ArrayList<String>();
-        info.add("None Yet");
+        List<String> trips = databaseDAO.GetAllTripNamesForCar(this.selectedCar, this.context);
+        List<String> repairs = databaseDAO.GetAllRepairsNamesForCar(this.selectedCar, this.context);
         this.expandableListDetail.put("Trips", trips);
-        this.expandableListDetail.put("Info", info);
         this.expandableListDetail.put("Repairs", repairs);
-
         this.expandableListTitle = new ArrayList<String>(this.expandableListDetail.keySet());
 
     }
