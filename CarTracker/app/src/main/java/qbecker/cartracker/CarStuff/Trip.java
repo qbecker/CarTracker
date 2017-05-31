@@ -11,9 +11,44 @@ import java.io.Serializable;
 
 public class Trip implements Serializable {
     String date;
+    String description;
     Double miles;
     Double cost;
     int id;
+    String uid;
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public Double getMiles() {
         return miles;
