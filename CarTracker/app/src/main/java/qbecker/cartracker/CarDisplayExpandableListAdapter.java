@@ -1,6 +1,7 @@
 package qbecker.cartracker;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,14 +25,15 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
         ExpandableListView.OnGroupExpandListener,
         ExpandableListView.OnGroupCollapseListener{
 
-    public Context context;
+    public CarDisplayActivity context;
     public List<String> expandableListTitle;
     public HashMap<String, List<String>> expandableListDetail;
     public String selectedCar;
     public List<String> repairDescriptions;
     public List<String> tripDescriptions;
+    private TextView currentSelectedTextView = null;
 
-    public CarDisplayExpandableListAdapter(Context context, List<String> expandableListTitle,
+    public CarDisplayExpandableListAdapter(CarDisplayActivity context, List<String> expandableListTitle,
                                            HashMap<String, List<String>> expandableListDetail, String selectedCar) {
         this.context = context;
         this.selectedCar = selectedCar;
@@ -52,6 +54,9 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
         this.expandableListDetail.put("Trips", tripDescriptions);
         this.expandableListDetail.put("Repairs", repairDescriptions);
         this.expandableListTitle = new ArrayList<String>(this.expandableListDetail.keySet());
+        context.carListView.setOnGroupExpandListener(this);
+        context.carListView.setOnGroupCollapseListener(this);
+
 
     }
 
@@ -78,6 +83,7 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item_id_date, null);
         }
+        convertView.setOnTouchListener(this);
         String[] expandedListTextItemsPostSplit = expandedListTextItemsPreSplit.split("@");
         TextView expandedListItemsDesc = (TextView) convertView
                 .findViewById(R.id.lblListItem);
@@ -89,9 +95,6 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
         expandedListItemsDesc.setText(expandedListTextItemsPostSplit[0]);
         expandedListItemsId.setText(expandedListTextItemsPostSplit[1]);
         expandedListItemsDate.setText(expandedListTextItemsPostSplit[2]);
-
-
-
         return convertView;
     }
 
@@ -147,19 +150,22 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
     public boolean onTouch(View v, MotionEvent event) {
         android.util.Log.w("","Entered onTouch");
         if (event.getAction()==MotionEvent.ACTION_DOWN){
+            android.util.Log.w("","Entered onTouch action down");
             // onTouch is passed the textview's parent view, a linearlayout - what we set the
             // event on. Look at its children to find the textview
-            if(v instanceof android.widget.LinearLayout){
-                android.widget.LinearLayout layView = (android.widget.LinearLayout)v;
+            if(v instanceof android.widget.RelativeLayout){
+                android.util.Log.w("","Entered onTouch instance of");
+                android.widget.RelativeLayout layView = (android.widget.RelativeLayout)v;
                 // the layout (from list_item.xml should only have one child, but, here's how
                 // you find the children of a layout or other view group.
-                for(int i=0; i<=layView.getChildCount(); i++){
+                String[] selectedItem = new String[2];
+                for(int i=0; i<= 1; i++){
                     if(layView.getChildAt(i) instanceof TextView){
                         TextView tmp = ((TextView)layView.getChildAt(i));
-                        android.util.Log.d(this.getClass().getSimpleName(),"in onTouch called for: " +
-                                tmp.getText());
+                        selectedItem[i] = tmp.getText().toString();
                     }
                 }
+                android.util.Log.w(selectedItem[0], selectedItem[1]);
             }
             // code below should never executes. onTouch is called for textview's linearlayout parent
             if(v instanceof TextView){
@@ -170,13 +176,26 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
         return true;
     }
 
-    @Override
-    public void onGroupCollapse(int groupPosition) {
-
+    public void onGroupExpand(int groupPosition){
+        Log.d(this.getClass().getSimpleName(),"in onGroupExpand called for: "+
+                expandableListDetail.keySet().toArray(new String[] {})[groupPosition]);
+        if (currentSelectedTextView != null){
+            currentSelectedTextView.setBackgroundColor(context.getResources().getColor(R.color.light_blue));
+            currentSelectedTextView = null;
+        }
+        for (int i=0; i< this.getGroupCount(); i++) {
+            if(i != groupPosition){
+                context.carListView.collapseGroup(i);
+            }
+        }
     }
 
-    @Override
-    public void onGroupExpand(int groupPosition) {
-
+    public void onGroupCollapse(int groupPosition){
+        android.util.Log.d(this.getClass().getSimpleName(),"in onGroupCollapse called for: "+
+                expandableListDetail.keySet().toArray(new String[] {})[groupPosition]);
+        if (currentSelectedTextView != null){
+            currentSelectedTextView.setBackgroundColor(context.getResources().getColor(R.color.light_blue));
+            currentSelectedTextView = null;
+        }
     }
 }

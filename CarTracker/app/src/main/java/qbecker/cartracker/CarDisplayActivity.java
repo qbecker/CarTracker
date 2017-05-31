@@ -15,7 +15,7 @@ public class CarDisplayActivity extends AppCompatActivity {
     private Button addTripButton;
     public ExpandableListView carListView;
     public CarDisplayExpandableListAdapter carExpandListViewAdapter;
-    private String selectedCar;
+    public String selectedCar;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;
 
@@ -23,13 +23,17 @@ public class CarDisplayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_display);
+        carListView = (ExpandableListView) findViewById(R.id.individualCarListView);
         Intent intent = getIntent();
         selectedCar = intent.getStringExtra("Selected Car");
         setTitle("Details for " + selectedCar);
+
         carExpandListViewAdapter = new CarDisplayExpandableListAdapter(this, expandableListTitle, expandableListDetail, selectedCar);
         addRepairButton = (Button) findViewById(R.id.addRepairButton);
         addTripButton = (Button) findViewById(R.id.addTripButton);
-        carListView = (ExpandableListView) findViewById(R.id.individualCarListView);
+
         carListView.setAdapter(carExpandListViewAdapter);
     }
+
+
 }
