@@ -1,6 +1,5 @@
 package qbecker.cartracker;
 
-import android.renderscript.Double2;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +9,7 @@ import android.widget.TextView;
 import android.content.Intent;
 import qbecker.cartracker.CarStuff.Trip;
 
-public class EditTrip extends AppCompatActivity {
+public class EditTripActivity extends AppCompatActivity {
 
     private Button saveButton;
 
@@ -27,6 +26,7 @@ public class EditTrip extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_trip);
+        setTitle("Edit Trip");
 
         saveButton = (Button) findViewById(R.id.tripSaveButton);
 
@@ -48,13 +48,13 @@ public class EditTrip extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setFromEditTexts(selectedTrip);
-                databaseDAO.InsertTrip(selectedTrip,EditTrip.this);
-                finish();
+                boolean success = databaseDAO.InsertTrip(selectedTrip,EditTripActivity.this);
+                if(success){
+                    finish();
+                }
             }
         });
     }
-
-
 
     private void fillEditTexts(Trip trip) {
         desEditText.setText(trip.getDescription());
@@ -63,8 +63,9 @@ public class EditTrip extends AppCompatActivity {
         dateEditText.setText(trip.getDate());
     }
 
+    
+    //// TODO: Handel error checking for input types
     private void setFromEditTexts(Trip trip){
-        boolean ret = true;
         trip.setDescription(desEditText.getText().toString());
         trip.setMiles(Double.parseDouble(milesEditText.getText().toString()));
         trip.setCost(Double.parseDouble(costEditText.getText().toString()));

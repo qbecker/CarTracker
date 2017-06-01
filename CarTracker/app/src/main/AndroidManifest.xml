@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".CarDisplayActivity" />
-        <activity android:name=".EditTrip"></activity>
+        <activity android:name=".EditTripActivity" />
+        <activity android:name=".EditRepairActivity" />
+        <activity android:name=".AddTripActivity" android:theme="@style/Theme.AppCompat.DayNight.Dialog"></activity>
     </application>
 
 </manifest>

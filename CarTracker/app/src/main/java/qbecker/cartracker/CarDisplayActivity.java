@@ -3,6 +3,7 @@ package qbecker.cartracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import java.util.HashMap;
@@ -33,6 +34,16 @@ public class CarDisplayActivity extends AppCompatActivity {
         addTripButton = (Button) findViewById(R.id.addTripButton);
 
         carListView.setAdapter(carExpandListViewAdapter);
+
+
+        addTripButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CarDisplayActivity.this, AddTripActivity.class);
+                CarDisplayActivity.this.startActivity(i);
+
+            }
+        });
     }
 
     @Override

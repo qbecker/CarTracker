@@ -18,7 +18,7 @@ CREATE TABLE repairs(
    description TEXT,
    cost TEXT,
    date TEXT,
-   uid TEXT
+   uid TEXT PRIMARY KEY
 );
 
 CREATE TABLE trips(

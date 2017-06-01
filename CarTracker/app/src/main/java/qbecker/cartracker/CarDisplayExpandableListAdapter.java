@@ -26,12 +26,12 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
         ExpandableListView.OnGroupExpandListener,
         ExpandableListView.OnGroupCollapseListener{
 
-    public CarDisplayActivity context;
-    public List<String> expandableListTitle;
-    public HashMap<String, List<String>> expandableListDetail;
-    public String selectedCar;
-    public List<String> repairDescriptions;
-    public List<String> tripDescriptions;
+    private CarDisplayActivity context;
+    private List<String> expandableListTitle;
+    private HashMap<String, List<String>> expandableListDetail;
+    private String selectedCar;
+    private List<String> repairDescriptions;
+    private List<String> tripDescriptions;
     private TextView currentSelectedTextView = null;
     private String selectedCategory;
 
@@ -170,12 +170,12 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
 
                 android.util.Log.w(selectedItem[0], selectedItem[1]);
                 if(selectedCategory.equals("Trips")){
-                    Intent edit = new Intent(context, EditTrip.class);
+                    Intent edit = new Intent(context, EditTripActivity.class);
                     edit.putExtra("uid", selectedItem[1]);
                     edit.putExtra("desc", selectedItem[0]);
                     context.startActivity(edit);
                 }else if(selectedCategory.equals("Repairs")){
-                    Intent edit = new Intent(context, EditTrip.class);
+                    Intent edit = new Intent(context, EditRepairActivity.class);
                     edit.putExtra("uid", selectedItem[1]);
                     edit.putExtra("desc", selectedItem[0]);
                     context.startActivity(edit);
