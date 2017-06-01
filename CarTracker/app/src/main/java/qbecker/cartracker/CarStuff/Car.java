@@ -112,4 +112,12 @@ public class Car implements Serializable {
     public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

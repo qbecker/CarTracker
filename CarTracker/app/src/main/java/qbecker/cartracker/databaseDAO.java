@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import qbecker.cartracker.CarStuff.Repair;
 import qbecker.cartracker.CarStuff.Trip;
+import qbecker.cartracker.CarStuff.Car;
 
 /**
  * Created by qbecker on 5/30/17.
@@ -40,6 +41,37 @@ public class databaseDAO {
             e.printStackTrace();
         }
         return al;
+    }
+
+    public static Car GetCarByName(String name, Context parent){
+        Car ret = new Car();
+        SQLiteDatabase crsDB;
+        Cursor cur;
+        CarDB db = new CarDB(parent);
+        try {
+            crsDB = db.openDB();
+            cur = crsDB.rawQuery("SELECT * FROM cars WHERE name = ?", new String[]{name});
+            while(cur.moveToNext()){
+                try{
+                    ret.setId(Integer.parseInt(cur.getString(0)));
+                    ret.setName(cur.getString(1));
+                    ret.setDescription(cur.getString(2));
+                    ret.setMake(cur.getString(3));
+                    ret.setModel(cur.getString(4));
+                    ret.setTotalMiles(Double.parseDouble(cur.getString(5)));
+                    ret.setTotalCost(Double.parseDouble(cur.getString(6)));
+                    ret.setMpg(Double.parseDouble(cur.getString(7)));
+
+                }catch(Exception ex){
+                    android.util.Log.w(parent.getClass().getSimpleName(),"exception stepping thru cursor"+ex.getMessage());
+                }
+            }
+            crsDB.close();
+            db.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ret;
     }
 
     public static ArrayList<Repair> GetAllRepairsNamesForCar(String name, Context parent){
