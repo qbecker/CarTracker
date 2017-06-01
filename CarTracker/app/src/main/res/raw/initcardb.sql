@@ -10,7 +10,7 @@ CREATE TABLE cars(
  model TEXT,
  totalMiles TEXT,
  totalCost TEXT,
- mpg TEXT,
+ mpg TEXT
 );
 
 CREATE TABLE repairs(
@@ -27,7 +27,7 @@ CREATE TABLE trips(
     miles TEXT,
     cost TEXT,
     date TEXT,
-    uid TEXT
+    uid TEXT PRIMARY KEY
 );
 
 

@@ -35,5 +35,20 @@ public class CarDisplayActivity extends AppCompatActivity {
         carListView.setAdapter(carExpandListViewAdapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.carListView.setAdapter(carExpandListViewAdapter);
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+
+        this.carListView.setAdapter(carExpandListViewAdapter);
+        finish();
+        startActivity(getIntent());
+    }
+
 
 }

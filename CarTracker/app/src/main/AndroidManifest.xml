@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CarDisplayActivity"></activity>
+        <activity android:name=".CarDisplayActivity" />
+        <activity android:name=".EditTrip"></activity>
     </application>
 
 </manifest>

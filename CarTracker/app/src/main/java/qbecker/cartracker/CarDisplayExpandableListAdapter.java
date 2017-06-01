@@ -1,6 +1,7 @@
 package qbecker.cartracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,6 +33,7 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
     public List<String> repairDescriptions;
     public List<String> tripDescriptions;
     private TextView currentSelectedTextView = null;
+    private String selectedCategory;
 
     public CarDisplayExpandableListAdapter(CarDisplayActivity context, List<String> expandableListTitle,
                                            HashMap<String, List<String>> expandableListDetail, String selectedCar) {
@@ -158,16 +160,29 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
                 android.widget.RelativeLayout layView = (android.widget.RelativeLayout)v;
                 // the layout (from list_item.xml should only have one child, but, here's how
                 // you find the children of a layout or other view group.
-                String[] selectedItem = new String[2];
-                for(int i=0; i<= 1; i++){
+                String[] selectedItem = new String[3];
+                for(int i=0; i<=layView.getChildCount(); i++){
                     if(layView.getChildAt(i) instanceof TextView){
                         TextView tmp = ((TextView)layView.getChildAt(i));
                         selectedItem[i] = tmp.getText().toString();
                     }
                 }
+
                 android.util.Log.w(selectedItem[0], selectedItem[1]);
+                if(selectedCategory.equals("Trips")){
+                    Intent edit = new Intent(context, EditTrip.class);
+                    edit.putExtra("uid", selectedItem[1]);
+                    edit.putExtra("desc", selectedItem[0]);
+                    context.startActivity(edit);
+                }else if(selectedCategory.equals("Repairs")){
+                    Intent edit = new Intent(context, EditTrip.class);
+                    edit.putExtra("uid", selectedItem[1]);
+                    edit.putExtra("desc", selectedItem[0]);
+                    context.startActivity(edit);
+                }
+
+
             }
-            // code below should never executes. onTouch is called for textview's linearlayout parent
             if(v instanceof TextView){
                 android.util.Log.d(this.getClass().getSimpleName(),"in onTouch called for: " +
                         ((TextView)v).getText());
@@ -179,6 +194,7 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
     public void onGroupExpand(int groupPosition){
         Log.d(this.getClass().getSimpleName(),"in onGroupExpand called for: "+
                 expandableListDetail.keySet().toArray(new String[] {})[groupPosition]);
+        selectedCategory = expandableListDetail.keySet().toArray(new String[] {})[groupPosition];
         if (currentSelectedTextView != null){
             currentSelectedTextView.setBackgroundColor(context.getResources().getColor(R.color.light_blue));
             currentSelectedTextView = null;

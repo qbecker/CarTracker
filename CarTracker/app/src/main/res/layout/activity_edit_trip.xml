@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="qbecker.cartracker.EditTrip">
+
+    <EditText
+        android:id="@+id/tripDescriptionEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp"
+        android:layout_alignRight="@+id/tripDateEditText"
+        android:layout_alignEnd="@+id/tripDateEditText" />
+
+    <EditText
+        android:id="@+id/tripMilesEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="12"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="121dp"
+        android:layout_marginTop="63dp"
+        android:layout_below="@+id/tripDescriptionEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/tripDescriptionEditText"
+        android:layout_alignEnd="@+id/tripDescriptionEditText" />
+
+    <EditText
+        android:id="@+id/tripCostEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="33"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="197dp"
+        android:layout_marginTop="78dp"
+        android:layout_below="@+id/tripMilesEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/tripDateEditText"
+        android:layout_alignEnd="@+id/tripDateEditText" />
+
+    <EditText
+        android:id="@+id/tripDateEditText"
+        style="@android:style/Widget.Holo.Spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="71dp"
+        android:ems="10"
+        android:inputType="date"
+        android:text="10/12/1970"
+        android:layout_below="@+id/tripCostEditText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tripMpgTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tripDescriptionEditText"
+        android:layout_marginLeft="62dp"
+        android:layout_marginStart="62dp"
+        android:layout_toRightOf="@+id/tripDescriptionEditText"
+        android:text="TextView"
+        android:layout_alignBottom="@+id/tripDescriptionEditText" />
+
+    <Button
+        android:id="@+id/tripSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tripDateEditText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/tripDateEditText"
+        android:layout_marginBottom="27dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:text="Save" />
+
+</RelativeLayout>

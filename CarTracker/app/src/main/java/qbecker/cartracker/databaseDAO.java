@@ -96,4 +96,52 @@ public class databaseDAO {
         }
         return al;
     }
+
+    public static Trip GetTrip(String desc, String uid, Context parent){
+        Trip ret = new Trip();
+        SQLiteDatabase crsDB;
+        Cursor cur;
+        CarDB db = new CarDB(parent);
+        try {
+            crsDB = db.openDB();
+            cur = crsDB.rawQuery("SELECT * FROM trips WHERE description = ? AND uid = ?", new String[]{desc, uid});
+            while(cur.moveToNext()){
+                try{
+                    ret = new Trip();
+                    ret.setId(Integer.parseInt(cur.getString(0)));
+                    ret.setDescription(cur.getString(1));
+                    ret.setMiles(Double.parseDouble(cur.getString(2)));
+                    ret.setCost(Double.parseDouble(cur.getString(3)));
+                    ret.setDate(cur.getString(4));
+                    ret.setUid(cur.getString(5));
+
+                }catch(Exception ex){
+                    android.util.Log.w(parent.getClass().getSimpleName(),"exception stepping thru cursor"+ex.getMessage());
+                }
+            }
+            crsDB.close();
+            db.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
+    public static boolean InsertTrip(Trip trip, Context context){
+        boolean ret = true;
+        CarDB db = new CarDB(context);
+
+        try {
+            SQLiteDatabase crsDB = db.openDB();
+            String insert = "insert or replace into  trips VALUES('"+ trip.getId() + "', '"+trip.getDescription()+"',  '" + String.valueOf(trip.getMiles()) + "',  '" + String.valueOf(trip.getCost()) +"', '"+ trip.getDate() + "', '" + trip.getUid() + "');";
+            crsDB.execSQL(insert);
+            crsDB.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            ret = false;
+        }
+        db.close();
+        return ret;
+    }
 }
