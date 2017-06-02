@@ -222,6 +222,29 @@ public class databaseDAO {
         db.close();
         return ret;
     }
+
+    public static boolean InsertCar(Car car, Context parent){
+        boolean ret = true;
+        CarDB db = new CarDB(parent);
+        try {
+            SQLiteDatabase crsDB = db.openDB();
+            String insert = "insert or replace into  cars VALUES('"+ Utilities.CreateUID()
+                    + "', '"+car.getName()+"',  '" + car.getDescription()
+                    + "',  '" + car.getMake()
+                    +"', '"+ car.getModel() +  "', '"+ Double.toString(car.getTotalMiles()) +
+                    "', '"+ Double.toString(car.getTotalCost()) +
+                    "', '"+ Double.toString(car.getMpg()) +"');";
+            crsDB.execSQL(insert);
+            crsDB.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            ret = false;
+        }
+        db.close();
+        return ret;
+    }
+
+
 }
 
 

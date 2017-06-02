@@ -51,6 +51,8 @@ public class Car implements Serializable {
         description = "No description";
         mpg = 0.0;
         totalMiles = 0.0;
+        totalCost = 0.0;
+
     }
 
     public Car(String name, String make, String model,

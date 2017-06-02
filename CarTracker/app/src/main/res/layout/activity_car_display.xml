@@ -29,20 +29,20 @@
         android:text="Add Repair"
         tools:layout_editor_absoluteX="236dp"
         tools:layout_editor_absoluteY="404dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/individualCarListView"
-        android:layout_alignStart="@+id/individualCarListView"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp" />
+        android:layout_alignStart="@+id/individualCarListView" />
 
     <ExpandableListView
         android:id="@+id/individualCarListView"
         android:layout_width="349dp"
-        android:layout_height="200dp"
+        android:layout_height="400dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="25dp"
         tools:layout_editor_absoluteX="18dp"
         tools:layout_editor_absoluteY="33dp" />
 

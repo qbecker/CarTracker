@@ -51,6 +51,9 @@ public class AddTripActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                Intent back = new Intent(AddTripActivity.this,CarDisplayActivity.class);
+                back.putExtra("Selected Car", parentCar.getName());
+                AddTripActivity.this.startActivity(back);
             }
         });
 
@@ -70,6 +73,8 @@ public class AddTripActivity extends AppCompatActivity {
                     Intent back = new Intent(AddTripActivity.this,CarDisplayActivity.class);
                     back.putExtra("Selected Car", parentCar.getName());
                     AddTripActivity.this.startActivity(back);
+
+                }else{
 
                 }
             }

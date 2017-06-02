@@ -19,7 +19,10 @@
         <activity android:name=".CarDisplayActivity" />
         <activity android:name=".EditTripActivity" />
         <activity android:name=".EditRepairActivity" />
-        <activity android:name=".AddTripActivity" android:theme="@style/Theme.AppCompat.DayNight.Dialog"></activity>
+        <activity
+            android:name=".AddTripActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
+        <activity android:name=".AddCarActivity" android:theme="@style/Theme.AppCompat.DayNight.Dialog"></activity>
     </application>
 
 </manifest>

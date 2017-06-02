@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="qbecker.cartracker.AddCarActivity">
+
+    <EditText
+        android:id="@+id/addCarNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/addCarDescriptionEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addCarNameEditText"
+        android:layout_alignStart="@+id/addCarNameEditText"
+        android:layout_below="@+id/addCarNameEditText"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Description" />
+
+    <EditText
+        android:id="@+id/addCarMakeEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/addCarDescriptionEditText"
+        android:layout_alignRight="@+id/addCarDescriptionEditText"
+        android:layout_below="@+id/addCarDescriptionEditText"
+        android:layout_marginTop="29dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Make" />
+
+    <EditText
+        android:id="@+id/addCarModelEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addCarMakeEditText"
+        android:layout_alignStart="@+id/addCarMakeEditText"
+        android:layout_below="@+id/addCarMakeEditText"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Model" />
+
+    <EditText
+        android:id="@+id/addCarMilesEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addCarModelEditText"
+        android:layout_alignStart="@+id/addCarModelEditText"
+        android:layout_below="@+id/addCarModelEditText"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="Miles" />
+
+    <Button
+        android:id="@+id/addCarSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addCarMilesEditText"
+        android:layout_alignStart="@+id/addCarMilesEditText"
+        android:layout_below="@+id/addCarMilesEditText"
+        android:layout_marginTop="30dp"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/addCarCancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addCarSaveButton"
+        android:layout_alignEnd="@+id/addCarMilesEditText"
+        android:layout_alignRight="@+id/addCarMilesEditText"
+        android:text="Cancel" />
+</RelativeLayout>

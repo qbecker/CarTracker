@@ -42,6 +42,7 @@ public class CarDisplayActivity extends AppCompatActivity {
                 Intent i = new Intent(CarDisplayActivity.this, AddTripActivity.class);
                 i.putExtra("parent name", selectedCar);
                 CarDisplayActivity.this.startActivity(i);
+                finish();
 
             }
         });
@@ -50,6 +51,7 @@ public class CarDisplayActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+
         this.carListView.setAdapter(carExpandListViewAdapter);
     }
 
