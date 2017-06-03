@@ -70,9 +70,6 @@ public class AddTripActivity extends AppCompatActivity {
                 boolean success = databaseDAO.InsertTrip(trip, AddTripActivity.this);
                 if(success){
                     finish();
-                    Intent back = new Intent(AddTripActivity.this,CarDisplayActivity.class);
-                    back.putExtra("Selected Car", parentCar.getName());
-                    AddTripActivity.this.startActivity(back);
 
                 }else{
 

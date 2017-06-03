@@ -16,13 +16,13 @@ public class Car implements Serializable {
     Double mpg;
     Double totalMiles;
     Double totalCost;
-    int id;
+    String id;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -37,7 +37,7 @@ public class Car implements Serializable {
             mpg = json.getDouble("mpg");
             totalMiles = json.getDouble("totalMiles");
             totalCost = json.getDouble("totalCost");
-            id = json.getInt("id");
+            id = json.getString("id");
 
         }catch(Exception e){
             android.util.Log.w(this.getClass().getSimpleName(), "Error reading from JSON");

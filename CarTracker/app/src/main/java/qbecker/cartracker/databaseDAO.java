@@ -53,7 +53,7 @@ public class databaseDAO {
             cur = crsDB.rawQuery("SELECT * FROM cars WHERE name = ?", new String[]{name});
             while(cur.moveToNext()){
                 try{
-                    ret.setId(Integer.parseInt(cur.getString(0)));
+                    ret.setId(cur.getString(0));
                     ret.setName(cur.getString(1));
                     ret.setDescription(cur.getString(2));
                     ret.setMake(cur.getString(3));
@@ -140,7 +140,7 @@ public class databaseDAO {
             while(cur.moveToNext()){
                 try{
                     ret = new Trip();
-                    ret.setId(Integer.parseInt(cur.getString(0)));
+                    ret.setId(cur.getString(0));
                     ret.setDescription(cur.getString(1));
                     ret.setMiles(Double.parseDouble(cur.getString(2)));
                     ret.setCost(Double.parseDouble(cur.getString(3)));
@@ -234,6 +234,24 @@ public class databaseDAO {
                     +"', '"+ car.getModel() +  "', '"+ Double.toString(car.getTotalMiles()) +
                     "', '"+ Double.toString(car.getTotalCost()) +
                     "', '"+ Double.toString(car.getMpg()) +"');";
+            crsDB.execSQL(insert);
+            crsDB.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            ret = false;
+        }
+        db.close();
+        return ret;
+    }
+
+    public static boolean RemoveCarCompleately(Car car, Context parent){
+        boolean ret = true;
+        CarDB db = new CarDB(parent);
+        try {
+            SQLiteDatabase crsDB = db.openDB();
+            String id = car.getId();
+            String insert = "DELETE FROM cars where id = '"+id +"'; DELETE FROM trips where id = '"+ id+"'; " +
+                    "DELETE FROM repairs where id = '"+id+"';";
             crsDB.execSQL(insert);
             crsDB.close();
         } catch (SQLException e) {

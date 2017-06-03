@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ import qbecker.cartracker.CarStuff.Trip;
  * Created by qbecker on 5/30/17.
  */
 
-public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter implements View.OnTouchListener,
+public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter implements
         ExpandableListView.OnGroupExpandListener,
         ExpandableListView.OnGroupCollapseListener{
 
@@ -35,7 +36,7 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
     private TextView currentSelectedTextView = null;
     private String selectedCategory;
 
-    public CarDisplayExpandableListAdapter(CarDisplayActivity context, List<String> expandableListTitle,
+    public CarDisplayExpandableListAdapter(final CarDisplayActivity context, List<String> expandableListTitle,
                                            HashMap<String, List<String>> expandableListDetail, String selectedCar) {
         this.context = context;
         this.selectedCar = selectedCar;
@@ -58,7 +59,30 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
         this.expandableListTitle = new ArrayList<String>(this.expandableListDetail.keySet());
         context.carListView.setOnGroupExpandListener(this);
         context.carListView.setOnGroupCollapseListener(this);
+        context.carListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+               TextView data  = (TextView) v
+                        .findViewById(R.id.lblListItemId);
+                String selectedListViewItemID = data.getText().toString();
+                data  = (TextView) v
+                        .findViewById(R.id.lblListItem);
+                String selectedListViewItemDescription = data.getText().toString();
 
+                if(selectedCategory.equals("Trips")){
+                    Intent edit = new Intent(context, EditTripActivity.class);
+                    edit.putExtra("uid", selectedListViewItemID);
+                    edit.putExtra("desc", selectedListViewItemDescription);
+                    context.startActivity(edit);
+                }else if(selectedCategory.equals("Repairs")){
+                    Intent edit = new Intent(context, EditRepairActivity.class);
+                    edit.putExtra("uid", selectedListViewItemID);
+                    edit.putExtra("desc", selectedListViewItemDescription);
+                    context.startActivity(edit);
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -85,7 +109,7 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_item_id_date, null);
         }
-        convertView.setOnTouchListener(this);
+        //convertView.setOnTouchListener(this);
         String[] expandedListTextItemsPostSplit = expandedListTextItemsPreSplit.split("@");
         TextView expandedListItemsDesc = (TextView) convertView
                 .findViewById(R.id.lblListItem);
@@ -147,7 +171,7 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
     public boolean isChildSelectable(int listPosition, int expandedListPosition) {
         return true;
     }
-
+/*
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         android.util.Log.w("","Entered onTouch");
@@ -190,7 +214,7 @@ public class CarDisplayExpandableListAdapter extends BaseExpandableListAdapter i
         }
         return true;
     }
-
+*/
     public void onGroupExpand(int groupPosition){
         Log.d(this.getClass().getSimpleName(),"in onGroupExpand called for: "+
                 expandableListDetail.keySet().toArray(new String[] {})[groupPosition]);

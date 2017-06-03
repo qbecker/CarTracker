@@ -90,9 +90,7 @@ public class MainActivity extends AppCompatActivity implements ListView.OnItemCl
     }
 
 
-
     private void prepareAdapter(){
-
         ArrayList<String> al = databaseDAO.getAllCars(this);
         names =  al.toArray(new String[al.size()]);
     }

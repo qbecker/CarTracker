@@ -1,6 +1,6 @@
 package qbecker.cartracker.CarStuff;
 
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -14,7 +14,7 @@ public class Trip implements Serializable {
     String description;
     Double miles;
     Double cost;
-    int id;
+    String id;
     String uid;
 
     public String getDate() {
@@ -41,11 +41,11 @@ public class Trip implements Serializable {
         this.description = description;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -69,8 +69,8 @@ public class Trip implements Serializable {
     public Trip(){
         miles = 0.0;
         cost = 0.0;
-        date = "";
-        id = 0;
+        date = "12/12/1970";
+        id = "0";
 
     }
 
@@ -79,14 +79,14 @@ public class Trip implements Serializable {
             JSONObject json = new JSONObject(jsonString);
             miles = json.getDouble("miles");
             cost = json.getDouble("cost");
-            id = json.getInt("id");
+            id = json.getString("id");
         } catch (Exception e) {
             android.util.Log.w(this.getClass().getSimpleName(), "Error reading from JSON");
         }
 
     }
 
-    public  Trip(Double miles, Double cost, String date, int id){
+    public  Trip(Double miles, Double cost, String date, String id){
         this.miles = miles;
         this.cost = cost;
         this.date = date;
